@@ -1,11 +1,11 @@
 # Secure Git – Suspicious Co-Author Detector
-
+```
    _____                              _______ __
   / ___/___  _______  __________     / ____(_) /_
   \__ \/ _ \/ ___/ / / / ___/ _ \   / / __/ / __/
  ___/ /  __/ /__/ /_/ / /  /  __/  / /_/ / / /_
 /____/\___/\___/\__,_/_/   \___/   \____/_/\__/
-
+```
 
 **Secure Git** is an optimized Go implementation of my suspicious co-author detector for Git repositories. It is especially useful for identifying commits where AI assistants such as Claude Code, Qwen-coder, GitHub Copilot, and others have added themselves as co-authors without the developer’s consent.
 
