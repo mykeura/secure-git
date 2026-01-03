@@ -1,254 +1,155 @@
-# Secure Git - Detector de Co-autores Sospechosos
+# Secure Git – Suspicious Co-Author Detector
 
-![GitHub](https://img.shields.io/badge/Git-Bash-4.0%2B-blue)
-![License](https://img.shields.io/badge/Licencia-MIT-green)
-![Platform](https://img.shields.io/badge/Plataforma-Linux%2FmacOS-lightgrey)
+**Secure Git** is an optimized Go implementation of my suspicious co-author detector for Git repositories. It is especially useful for identifying commits where AI assistants such as Claude Code, Qwen-coder, GitHub Copilot, and others have added themselves as co-authors without the developer’s consent.
 
-**Secure Git** es una herramienta de línea de comandos diseñada para detectar y reportar co-autores sospechosos en repositorios Git. Especialmente útil para identificar commits donde asistentes de IA como Qwen-coder, ChatGPT, GitHub Copilot y otros se han atribuido autoría sin consentimiento.
+## 🚨 Problem It Solves
 
-## 🚨 Problema que Resuelve
+Some AI assistants and automated development tools add `Co-authored-by:` lines to Git commits without the developer’s explicit consent, which can:
 
-Algunos asistentes de IA y herramientas de desarrollo automático agregan líneas `Co-authored-by:` en los commits de Git sin el conocimiento del desarrollador, lo que puede:
-- Comprometer la autoría legítima del código
-- Violar políticas de propiedad intelectual
-- Generar problemas de licenciamiento
-- Crear confusión en la trazabilidad del código
+* Compromise legitimate code authorship.
+* Violate intellectual property policies.
+* Create licensing issues.
+* Cause confusion in code ownership and traceability.
 
-Secure Git analiza automáticamente tus repositorios y genera reportes detallados de contaminación.
+Secure Git automatically analyzes your repositories and generates detailed contamination reports.
 
-## ✨ Características
+## Why did I create this tool?
 
-- **🔍 Detección Avanzada**: Patrones predefinidos para co-autores sospechosos comunes
-- **📊 Reportes Detallados**: Estadísticas completas y listado de commits contaminados
-- **⚡ Alto Rendimiento**: Búsqueda recursiva optimizada y procesamiento paralelo
-- **🎨 Salida Colorida**: Interfaz intuitiva con soporte de colores robusto
-- **🔧 Configurable**: Directorios personalizables y opciones flexibles
-- **🛡️ Seguro**: No modifica repositorios, solo analiza y reporta
+This tool was born out of a personal experience in which an AI model claimed co-authorship in a project that had taken over a year to develop. It was honestly frustrating to discover that after months of solitary work, an AI tool was attributing itself as a co-author simply because I had asked it to perform a commit on my behalf.
 
-## 📋 Requisitos del Sistema
+That situation clearly highlighted the need for a tool capable of detecting and reporting these unwanted co-author inclusions, helping developers protect their legitimate authorship.
 
-### Implementación Bash (Recomendada)
-- **Bash**: Versión 4.0 o superior
-- **Git**: Versión 2.0 o superior
-- **Sistema Operativo**: Linux, macOS, o cualquier sistema Unix-like
-- **Herramientas**: `grep`, `sed`, `awk` (generalmente preinstaladas)
+## ✨ Features
 
-### Implementación Python (Alternativa)
-- **Python**: Versión 3.6 o superior
-- **Git**: Versión 2.0 o superior
+* **🚀 High Performance**: Go implementation for faster analysis.
+* **🔍 Advanced Detection**: Predefined patterns for common suspicious co-authors.
+* **📊 Detailed Reports**: Complete statistics and lists of contaminated commits.
+* **⚡ Parallel Processing**: Concurrent analysis of multiple repositories.
+* **🔧 Configurable**: Customizable and persistent development directory.
+* **🛡️ Safe**: Does not modify repositories — analysis and reporting only.
+* **💾 Persistence**: Saves the development directory to a `.env` file for future runs.
 
-## 🚀 Instalación Rápida
+## 📋 System Requirements
 
-### Implementación Bash (Principal)
+### Go Implementation
+
+* **Go**: Version 1.16 or higher (for building).
+* **Git**: Version 2.0 or higher.
+* **Operating System**: Linux, macOS, or any Unix-like system.
+
+## 🚀 Installation
+
+### Method 1: Precompiled Binary
+
+1. Download the binary for your operating system.
+2. Make it executable: `chmod +x secure-git`
+3. Run it: `./secure-git`
+
+### Method 2: Build from Source
+
 ```bash
-# Descargar el script
-curl -o secure-git.sh https://raw.githubusercontent.com/tu-usuario/secure-git/main/secure-git.sh
-
-# Hacer ejecutable
-chmod +x secure-git.sh
-
-# Mover a PATH (opcional)
-sudo mv secure-git.sh /usr/local/bin/secure-git
-```
-
-### Implementación Python (Alternativa)
-```bash
-# Descargar el script
-curl -o secure-git.py https://raw.githubusercontent.com/tu-usuario/secure-git/main/secure-git.py
-
-# Hacer ejecutable
-chmod +x secure-git.py
-```
-
-### Método 2: Clonar Repositorio
-```bash
-git clone https://github.com/tu-usuario/secure-git.git
+# Clone the repository
+git clone https://github.com/mykeura/secure-git.git
 cd secure-git
-chmod +x secure-git.sh secure-git.py
+
+# Build
+go build -o secure-git
+
+# Make executable
+chmod +x secure-git
 ```
 
-## 🔄 Implementaciones Disponibles
+## 📖 Usage
 
-Secure Git ofrece dos implementaciones con diferentes características:
+### Basic Execution
 
-### 🐚 Implementación Bash (Principal)
-- **Ventajas**: Más rápida, menor consumo de recursos, mayor portabilidad
-- **Características**: Soporte de colores robusto, procesamiento paralelo, búsqueda profunda optimizada
-- **Recomendada para**: Uso general, sistemas con recursos limitados, integración CI/CD
-
-### 🐍 Implementación Python (Alternativa)
-- **Ventajas**: Código más legible, fácil de extender, manejo de errores más robusto
-- **Características**: Análisis estructurado, reportes detallados, fácil personalización
-- **Recomendada para**: Desarrollo, debugging, sistemas donde Python es preferido
-
-## 📖 Uso Básico
-
-### Implementación Bash (Recomendada)
 ```bash
-# Análisis en directorios por defecto
-./secure-git.sh
-
-# Análisis en directorios específicos
-./secure-git.sh ~/proyectos ~/trabajo ~/desarrollo
-
-# Modo silencioso (solo resultados críticos)
-./secure-git.sh --quiet
-
-# Procesamiento paralelo para mejor rendimiento
-./secure-git.sh --parallel
+./secure-git
 ```
 
-### Implementación Python (Alternativa)
-```bash
-# Análisis básico
-python3 secure-git.py
+The first time you run the program, you will be prompted to enter your main development directory. This path will be saved for future executions.
 
-# Con Python ejecutable directo (si tiene shebang)
-./secure-git.py
-```
-
-## 🔧 Opciones de Línea de Comandos
-
-### Implementación Bash
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| `-h, --help` | Mostrar ayuda completa | `./secure-git.sh --help` |
-| `-v, --version` | Mostrar versión | `./secure-git.sh --version` |
-| `-d, --dirs` | Directorios específicos (separados por coma) | `./secure-git.sh -d "~/dev,~/code"` |
-| `-r, --recursive` | Búsqueda recursiva (activado por defecto) | `./secure-git.sh --no-recursive` |
-| `-p, --parallel` | Procesamiento paralelo | `./secure-git.sh -p` |
-| `-q, --quiet` | Modo silencioso | `./secure-git.sh --quiet` |
-| `--no-color` | Desactivar colores | `./secure-git.sh --no-color` |
-
-### Implementación Python
-La implementación Python actualmente no soporta opciones de línea de comandos y ejecuta un análisis automático en directorios predefinidos.
-
-## 📊 Ejemplo de Salida
+### Sample Output
 
 ```bash
-$ ./secure-git.sh ~/proyectos
+$ ./secure-git
 
 ==============================================================================
-SECURE GIT - REPORTE DE CO-AUTORES SOSPECHOSOS (BASH)
+SECURE GIT – SUSPICIOUS CO-AUTHOR REPORT
 ==============================================================================
 
-📊 ESTADÍSTICAS GENERALES
-   Directorios analizados: 3
-   Repositorios Git encontrados: 12
-   Repositorios contaminados: 2
-   Repositorios limpios: 10
+📊 GENERAL STATISTICS
+   Repositories analyzed: 12
+   Contaminated repositories: 2
+   Clean repositories: 10
 
-📛 REPOSITORIOS CONTAMINADOS
+📛 CONTAMINATED REPOSITORIES
 ----------------------------------------
 
-📁 /home/usuario/proyectos/api-service
-   Commits totales: 147
-   Commits sospechosos: 3
-   Co-autores detectados:
+📁 /home/user/projects/api-service
+   Total commits: 147
+   Suspicious commits: 3
+   Detected co-authors:
+     • Co-authored-by: Claude <claude@anthropic.com>
      • Co-authored-by: Qwen-coder <qwen-coder@alibabacloud.com>
-     • Co-authored-by: GitHub Copilot
 
-📁 /home/usuario/proyectos/frontend-app
-   Commits totales: 89
-   Commits sospechosos: 1
-   Co-autores detectados:
-     • Co-authored-by: AI Assistant
+📁 /home/user/projects/frontend-app
+   Total commits: 89
+   Suspicious commits: 1
+   Detected co-authors:
+     • Co-authored-by: Claude <claude@anthropic.com>
 
-✅ REPOSITORIOS LIMPIOS (10)
+✅ CLEAN REPOSITORIES
 ----------------------------------------
-   /home/usuario/proyectos/docs (45 commits)
-   /home/usuario/proyectos/utils (23 commits)
+   /home/user/projects/docs (45 commits)
+   /home/user/projects/utils (23 commits)
    ...
 
-🚨 ALERTA DE SEGURIDAD
-   Se encontraron 2 repositorios contaminados
-   con un total de 4 commits sospechosos
+🚨 SECURITY ALERT
+   2 contaminated repositories were found
+   with a total of 4 suspicious commits
 
-RECOMENDACIONES
-   1. Revise los commits sospechosos con: git log --oneline
-   2. Considere reescribir el historial con: git rebase -i
-   3. Configure hooks de Git para prevenir futuras contaminaciones
+⚠️  RECOMMENDATIONS AND WARNINGS
+   1. BACK UP THE .git DIRECTORY BEFORE PROCEEDING
+   2. Review suspicious commits using: git log --oneline
+   3. Consider rewriting history with: git rebase -i
+   4. Configure Git hooks to prevent future contamination
+
+⚠️  IMPORTANT WARNING
+   Modifying commit history is a delicate process
+   that can lead to data loss if not handled properly.
+   Make sure you have advanced Git knowledge before proceeding.
 ```
 
-## 🔍 Patrones Detectados
+## 🔍 Detected Patterns
 
-Secure Git detecta automáticamente los siguientes patrones de co-autores sospechosos:
+Secure Git automatically detects the following suspicious co-author patterns:
 
-### Asistentes de IA Específicos
-- **Qwen-coder** y variantes (Alibaba Cloud)
-- **ChatGPT** y asistentes OpenAI
-- **GitHub Copilot** (Microsoft)
-- **CodeLlama**, **Bard**, **Claude**, **Gemini**
-- **AI Assistant** y variantes genéricas
+### Specific AI Assistants
 
-### Patrones de Dominio
-- Co-autores de dominios de empresas de IA:
-  - `@openai.com`, `@anthropic.com`, `@microsoft.com`
-  - `@google.com`, `@alibabacloud.com`, `@amazon.com`
-  - `@facebook.com`, `@meta.com`
+* **Qwen-coder** and variants (Alibaba Cloud)
+* **ChatGPT** and OpenAI assistants
+* **GitHub Copilot** (Microsoft)
+* **CodeLlama**, **Claude**, **Llama**, **Mistral**
+* **Amazon Q**, **Gemini**, **Aider**
+* **AI Assistant** and generic variants
 
-## ⚙️ Configuración Avanzada
+### Domain Patterns
 
-### Archivo de Configuración
-Puedes crear un archivo `config.json` para personalizar la búsqueda:
+* Co-authors using AI company domains:
 
-```json
-{
-    "search_directories": [
-        "/home/usuario/proyectos",
-        "/home/usuario/trabajo",
-        "/home/usuario/desarrollo"
-    ],
-    "suspicious_patterns": [
-        "Co-authored-by:\\s*[Qq]wen[-\\s]*[Cc]oder",
-        "Co-authored-by:\\s*[Cc]hat[Gg][Pp][Tt]"
-    ]
-}
-```
+  * `@openai.com`, `@anthropic.com`, `@microsoft.com`
+  * `@google.com`, `@alibabacloud.com`, `@amazon.com`
+  * `@facebook.com`, `@meta.com`
 
-### Variables de Entorno
-```bash
-# Desactivar colores (útil para CI/CD)
-export NO_COLOR=1
+## ⚙️ Configuration
 
-# Forzar colores
-export FORCE_COLOR=1
+On first run, the program asks for your main development directory. This configuration is saved to a `.secure-git.env` file in your home directory for future executions.
 
-# Directorios por defecto personalizados
-export SECURE_GIT_DIRS="/path/to/projects,/another/path"
-```
+## 🔄 CI/CD Integration
 
-## 🛠️ Solución de Problemas
+### GitHub Actions Example
 
-### Error: "Dependencias faltantes"
-```bash
-# En Ubuntu/Debian
-sudo apt update && sudo apt install git grep sed awk
-
-# En CentOS/RHEL
-sudo yum install git grep sed awk
-
-# En macOS (con Homebrew)
-brew install git grep gnu-sed awk
-```
-
-### Error: "Permisos denegados"
-```bash
-# Verificar permisos del script
-chmod +x secure-git.sh
-
-# Ejecutar con permisos adecuados
-./secure-git.sh
-```
-
-### Error: "No se encontraron repositorios Git"
-- Verifica que los directorios especificados existan
-- Usa rutas absolutas o expande `~` correctamente
-- Asegúrate de tener permisos de lectura en los directorios
-
-## 🔄 Integración con CI/CD
-
-### Ejemplo para GitHub Actions
 ```yaml
 name: Secure Git Scan
 on: [push, pull_request]
@@ -258,47 +159,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Run Secure Git Scan
         run: |
-          curl -s https://raw.githubusercontent.com/tu-usuario/secure-git/main/secure-git.sh | bash -s -- --quiet --no-color
-        env:
-          NO_COLOR: 1
+          # Assuming the binary is included or downloaded
+          ./secure-git
 ```
 
-### Ejemplo para GitLab CI
-```yaml
-secure_git_scan:
-  script:
-    - curl -s https://raw.githubusercontent.com/tu-usuario/secure-git/main/secure-git.sh | bash -s -- --quiet --no-color
-  only:
-    - merge_requests
-```
+## 📝 License
 
-## 📝 Licencia
+This project is licensed under the GPLv3 License. See the `LICENSE` file for more details.
 
-Este proyecto está licenciado bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+## 🤝 Contributing
 
-## 🤝 Contribuciones
+Contributions are welcome. Please:
 
-Las contribuciones son bienvenidas. Por favor:
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-1. Haz un fork del proyecto
-2. Crea una rama para tu característica (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+## ⚠️ Disclaimer
 
-## ⚠️ Aviso Legal
-
-Este software se proporciona "tal cual", sin garantía de ningún tipo. Los usuarios son responsables de verificar y validar los resultados antes de tomar cualquier acción basada en los reportes generados.
-
-## 📞 Soporte
-
-- **Issues**: [GitHub Issues](https://github.com/tu-usuario/secure-git/issues)
-- **Documentación**: [Wiki del Proyecto](https://github.com/tu-usuario/secure-git/wiki)
-- **Email**: soporte@ejemplo.com
+This software is provided “as is”, without warranty of any kind. Users are responsible for verifying and validating the results before taking any action based on the generated reports.
 
 ---
 
-**¿Encontraste útil Secure Git?** ⭐ Dale una estrella al repositorio para apoyar el proyecto!
+**Did you find Secure Git useful?** ⭐ Star the repository to support the project!
+
+---
+
